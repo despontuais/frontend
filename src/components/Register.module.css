@@ -1,0 +1,55 @@
+.backgroundRegister {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh; /* Isso garante que a altura ocupe toda a tela */
+    background-color: #4c4c4c;
+}
+
+.userArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Isso alinha o conteúdo ao centro horizontalmente */
+}
+
+.label {
+    margin-bottom: 0.5em; /* pequeno espaço abaixo dos labels */
+}
+
+.infoArea {
+    width: 100%; /* Faz o input ocupar toda a largura do container pai */
+    max-width: 300px; /* Limita a largura máxima dos inputs (px, tem que rever isso ai) */
+    padding: 0.5em;
+    margin-bottom: 1em; 
+    border: 1px solid green;
+    border-radius: 8px;
+}
+
+.logArea{
+        display: flex;
+        justify-content: space-around; /* Isso distribui os botões com espaço igual entre eles */
+        width: 100%; 
+        max-width: 300px; /* Limita a largura máxima dos botões (rever isso caso o cronolog seja mudado para outras telas)*/
+    
+}
+
+.forgetPassword{
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    background-color: green;
+    border: 1px solid white;
+    border-radius: 10%;
+    padding: 0.5rem 1rem; /*isso auiq é dentro do botao*/
+    margin: 0.5em; /* isso aqui é fora do btn */
+}
+
+.btn:hover {
+    cursor: pointer;
+}
