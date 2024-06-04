@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 
 const LoginScreen = () => {
     
+    //testing ping route
     const ping = async () => {
         try{
             const res = await axios.get('http://localhost:3000/api/ping');
@@ -23,10 +24,12 @@ const LoginScreen = () => {
         }
     }
  
+    //ping the backend as soon as the page loads
     useEffect(() => {
         ping();
     }, [])
 
+    //getting user input
     const [emailInput, setEmailInput] = useState('');
 
     const [passwordInput, setPasswordInput] = useState('');
@@ -35,6 +38,7 @@ const LoginScreen = () => {
         login();
     }
 
+    //testing login route
     const login = async () => {
         try{
             const res = await axios.post('http://localhost:3000/api/auth/login', {
