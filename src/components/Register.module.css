@@ -44,6 +44,7 @@
 .btn {
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: green;
     border: 1px solid white;
     border-radius: 10%;
@@ -53,4 +54,10 @@
 
 .btn:hover {
     cursor: pointer;
+}
+
+.error{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
 }
