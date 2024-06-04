@@ -2,51 +2,52 @@
 //style
 import loginStyle from './LoginScreen.module.css';
 
+//request
+import axios from 'axios';
+
 //logo
 import cronologo from "../../public/Cronologo.png"
 import Image from 'next/image';
+
+//effect and state
 import { useEffect, useState } from 'react';
 
 const LoginScreen = () => {
-
-    const [emailInput, setEmailInput] = useState('');
-
-    const [passwordInput, setPasswordInput] = useState('');
- 
-    const handleButtonClick = () => {
-        login();
-    }
-
+    
     const ping = async () => {
         try{
-            const res = await fetch('http://localhost:3000/api/ping');
-            console.log(await res.json());
+            const res = await axios.get('http://localhost:3000/api/ping');
+            console.log(res.data);
         }catch(err){
-            console.log(err)
+            console.log(err);
         }
-        
     }
  
     useEffect(() => {
         ping();
     }, [])
 
+    const [emailInput, setEmailInput] = useState('');
+
+    const [passwordInput, setPasswordInput] = useState('');
+ 
+    const handleLogin = () => {
+        login();
+    }
+
     const login = async () => {
         try{
-            const res = await fetch('http://localhost:3000/api/auth/login', {
-                method: 'POST',
+            const res = await axios.post('http://localhost:3000/api/auth/login', {
                 headers: {
-                    'Content-type': 'application/json'
+                    'Content-type': 'application/json',
+                    'Accept' : '*/*'
                 },
-                body: JSON.stringify({
                     email: emailInput,
                     password: passwordInput
-                })
             });
-            const json = await res.json();
-            console.log(json);
+           console.log(res.data);
         }catch(err){
-            console.log(err);
+            //console.log(err);
         }
     }
 
@@ -77,7 +78,7 @@ const LoginScreen = () => {
 
                 {/* parte dos botões */}
                 <div className={loginStyle.logArea}>
-                    <input className={loginStyle.btn} type="button" value="Login" onClick={handleButtonClick} />
+                    <input className={loginStyle.btn} type="button" value="Login" onClick={handleLogin} />
                     <input className={loginStyle.btn} type="button" value="Registrar" />
                 </div>
                 <a href="/" className={loginStyle.forgetPassword}>Esqueci minha senha</a>
