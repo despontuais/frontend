@@ -1,10 +1,14 @@
-"use client"
-import React from 'react'
+"use client";
+import React, { useState } from 'react';
 import registerStyle from './Register.module.css';
-import { useState } from 'react';
 import axios from 'axios';
+import Image from 'next/image';
+import cronologo from "../../public/CronoLogo.png";
+import { useRouter } from 'next/navigation';
 
 const RegisterScreen = () => {
+  const router = useRouter();
+
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   const [confirmPasswordInput, setconfirmPasswordInput] = useState('');
@@ -45,15 +49,15 @@ const RegisterScreen = () => {
       errors.confirmPassword = 'As senhas não correspondem';
     }
 
-   // Confirmação de email
+    // Confirmação de email
     if (!emailInput) errors.email = 'Email é obrigatório';
     if (emailInput && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput)) errors.email = 'Formato de email inválido';
-    
+
     // Confirmação de nascimento
     if (!birthdateInput) errors.birthdate = 'Data de nascimento é obrigatória';
     if (birthdateInput && new Date(birthdateInput) >= new Date()) errors.birthdate = 'Data de nascimento inválida';
 
-    //Aceite obrigatório dos termos
+    // Aceite obrigatório dos termos
     if (!termsAccepted) errors.terms = ' \n\nVocê deve aceitar os termos e condições';
 
     return errors;
@@ -72,6 +76,8 @@ const RegisterScreen = () => {
         birthDate: birthdateInput
       });
       console.log(res.data);
+      // Redirecionar para a página de login após o registro bem-sucedido
+      router.push('/login');
     } catch (err) {
       console.log(err);
     }
@@ -81,7 +87,8 @@ const RegisterScreen = () => {
     <div className={registerStyle.backgroundRegister}>
       <title>Cronolog</title>
 
-      <h1>Área de Registro</h1>
+     <Image src={cronologo} width={270} height={170} alt="Cronolog Logo"></Image>
+     <br></br><br></br>
 
       <form action="/api/register" method="POST">
         <div className={registerStyle.userArea}>
@@ -150,7 +157,7 @@ const RegisterScreen = () => {
           {errors.birthdate && <span className={registerStyle.error}>{errors.birthdate}</span>}
         </div>
 
-        <div>
+        <div className={registerStyle.termos}>
           <input
             type="checkbox"
             name="terms"
@@ -158,7 +165,7 @@ const RegisterScreen = () => {
             required
             checked={termsAccepted}
             onChange={e => setTermsAccepted(e.target.checked)}
-          /> Declaro que li e aceito os termos e condições
+          /> Declaro que li e aceito os termos e condições <br></br><br></br>
           {errors.terms && <span className={registerStyle.error}> <br/> {errors.terms}</span>}
           
           <input

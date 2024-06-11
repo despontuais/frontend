@@ -1,3 +1,8 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,350;1,350&display=swap');
+
+
 .backgroundLogin {
     display: flex;
     flex-direction: column;
@@ -12,6 +17,9 @@
     display: flex;
     flex-direction: column;
     align-items: center; /* Isso alinha o conteúdo ao centro horizontalmente */
+    font-family: "Raleway", sans-serif;
+    font-weight: 350;
+    font-style: normal;
 }
 
 .label {
@@ -23,8 +31,10 @@
     max-width: 300px; /* Limita a largura máxima dos inputs (px, tem que rever isso ai) */
     padding: 0.5em;
     margin-bottom: 1em; 
-    border: 1px solid green;
-    border-radius: 8px;
+    border: 1px solid rgb(18, 63, 18);
+    border-radius: 3px;
+    font-weight: 350;
+    font-style: normal;
 }
 
 .logArea {
@@ -32,21 +42,42 @@
     justify-content: space-around; /* Isso distribui os botões com espaço igual entre eles */
     width: 100%; 
     max-width: 300px; /* Limita a largura máxima dos botões (rever isso caso o cronolog seja mudado para outras telas)*/
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 350;
+    font-style: normal;
 }
 
 .forgetPassword{
     display: flex;
     justify-content: center;
+    font-family: "Raleway", sans-serif;
+    text-decoration: none;
+    font-optical-sizing: auto;
+    font-weight: 350;
+    font-style: normal;
 }
 
 .btn {
     background-color: green;
-    border: 1px solid white;
-    border-radius: 10%;
+    border: 1px, rgb(28, 61, 31);
+    border-radius: 8%;
     padding: 0.5rem 1rem; /*isso auiq é dentro do botao*/
     margin: 0.5em; /* isso aqui é fora do btn */
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 350;
+    font-style: normal;
+    
 }
 
 .btn:hover {
     cursor: pointer;
 }
+
+.logo {
+    width: 300px;
+    height: 200px;
+}
+
+

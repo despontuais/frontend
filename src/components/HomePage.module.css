@@ -1,0 +1,108 @@
+.background {
+    background-color: #3f3f3f;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.appBar {
+    background-color: #297433; /* Customize com sua cor preferida */
+    margin-bottom: 20px;
+}
+
+.logo {
+    margin-right: auto;
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+}
+
+.userImage {
+    margin-right: 40px;
+ 
+}
+
+.userMenu {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto; /* Ajusta o menu do usuário à direita */
+}
+
+.tabs {
+    margin-bottom: 20px;
+    background-color: #694e4e; /* Customize com sua cor preferida */
+    color: #fff; /* Texto em branco para melhor contraste */
+}
+
+.tab {
+    min-width: 100px;
+    color: #fff; /* Texto em branco para melhor contraste */
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    background: #83b39b;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(25% - 20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #fff; /* Texto em branco para melhor contraste */
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popupContent {
+    background: #2e2323;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    position: relative;
+    color: #a12121; /* Texto em branco para melhor contraste */
+}
+
+.closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.logo {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 1%;
+    width: 330px;
+    height: 200px;
+}
+
+.p {
+    font-family: 'Raleway';
+}

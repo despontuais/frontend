@@ -1,94 +1,92 @@
-"use client"
-//style
 import loginStyle from './LoginScreen.module.css';
-
-//request
+import Button from '@mui/material/Button';
 import axios from 'axios';
-
-//logo
-import cronologo from "../../public/Cronologo.png"
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import Image from 'next/image';
-
-//effect and state
-import { useEffect, useState } from 'react';
+import cronologo from "../../public/CronoLogo.png";
 
 const LoginScreen = () => {
-    
-    //testing ping route
-    const ping = async () => {
-        try{
-            const res = await axios.get('http://localhost:3000/api/ping');
-            console.log(res.data);
-        }catch(err){
-            console.log(err);
-        }
-    }
- 
-    //ping the backend as soon as the page loads
-    useEffect(() => {
-        ping();
-    }, [])
-
-    //getting user input
+    const router = useRouter();
     const [emailInput, setEmailInput] = useState('');
-
     const [passwordInput, setPasswordInput] = useState('');
- 
-    const handleLogin = () => {
-        login();
-    }
 
-    //testing login route
-    const login = async () => {
-        try{
+    const handleLogin = async () => {
+        try {
             const res = await axios.post('http://localhost:3000/api/auth/login', {
+                email: emailInput,
+                password: passwordInput
+            }, {
                 headers: {
-                    'Content-type': 'application/json',
-                    'Accept' : '*/*'
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
                 },
-                    email: emailInput,
-                    password: passwordInput
+                withCredentials: true // Permite o envio de cookies
             });
-           console.log(res.data);
-        }catch(err){
-            //console.log(err);
-        }
-    }
 
+            if (res.data.status) {
+                router.push('/home');
+            } else {
+                console.log('Login failed: ', res.data.error);
+            }
+        } catch (err) {
+            console.error('Error during login: ', err);
+        }
+    };
 
     return (
         <div className={loginStyle.backgroundLogin}>
             <title>Cronolog</title>
-
-            <h1>CronoLogin</h1>
-
-            {/* fazer a imagem aparecer aqui */}
-            <Image 
-                src={cronologo}
-                width={500}
-                height={500}
-                alt="Cronolog Logo"
-                />            
+            <Image src={cronologo} width={260} height={180} alt="Cronolog Logo" />
+            <br /><br />
             <form action="">
-                {/* parte das informações do usuário */}
-
                 <div className={loginStyle.userArea}>
                     <label htmlFor="User" className={loginStyle.label}>Usuário</label>
-                    <input type="text" placeholder='Usuário' className={loginStyle.infoArea} name="user" id="User" value={emailInput} onChange={e => setEmailInput(e.target.value)}/>
+                    <input 
+                        type="text" 
+                        placeholder='Usuário' 
+                        className={loginStyle.infoArea} 
+                        name="user" 
+                        id="User" 
+                        value={emailInput} 
+                        onChange={e => setEmailInput(e.target.value)} 
+                    />
 
                     <label htmlFor="Password" className={loginStyle.label}>Senha</label>
-                    <input type="password" placeholder='Senha' className={loginStyle.infoArea} name="password" id="Password" value={passwordInput} onChange={e => setPasswordInput(e.target.value)} />
+                    <input 
+                        type="password" 
+                        placeholder='Senha' 
+                        className={loginStyle.infoArea} 
+                        name="password" 
+                        id="Password" 
+                        value={passwordInput} 
+                        onChange={e => setPasswordInput(e.target.value)} 
+                    />
                 </div>
 
-                {/* parte dos botões */}
                 <div className={loginStyle.logArea}>
-                    <input className={loginStyle.btn} type="button" value="Login" onClick={handleLogin} />
-                    <input className={loginStyle.btn} type="button" value="Registrar" />
+                    <Button 
+                        variant="contained" 
+                        color="secondary" 
+                        onClick={handleLogin} 
+                        className={loginStyle.btn}
+                    >
+                        Login
+                    </Button>
+                    <Button 
+                        variant="outlined" 
+                        color="secondary" 
+                        className={loginStyle.btn}
+                    >
+                        Registrar
+                    </Button>
                 </div>
+                <br />
                 <a href="/" className={loginStyle.forgetPassword}>Esqueci minha senha</a>
             </form>
         </div>
-    )
+    );
 }
 
 export default LoginScreen;
+
