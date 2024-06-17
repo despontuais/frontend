@@ -1,0 +1,24 @@
+{
+    "Index": {
+      "title": "Olá mundo!"
+    },
+    "Form": {
+      "cardLoginTitle": "Login",
+      "cardLoginDescription": "Enter your login details.",
+      "cardTitle": "Register",
+      "cardDescription": "Enter your registration details.",
+      "usernameLabel": "Username",
+      "usernamePlaceholder": "Enter your username",
+      "dateLabel": "Date of Birth",
+      "datePlaceholder": "Choose a date",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "confirmPasswordLabel": "Confirm your password",
+      "confirmPasswordPlaceholder": "Repeat the password",
+      "terms": "I declare that I have read and accept the terms and conditions",
+      "singUpButtonText": "Sign Up",
+      "singInButtonText": "Sign in",
+      "loginLabel": "Login",
+      "loginPlaceholder": "email or username"
+    }
+  }

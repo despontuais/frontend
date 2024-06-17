@@ -1,0 +1,21 @@
+{
+    "Form":{
+        "cardLoginTitle": "Iniciar sesión",
+        "cardLoginDescription": "Ingrese sus datos de inicio de sesión.",
+        "cardTitle": "Registrarse",
+        "cardDescription": "Ingrese sus datos de registro.",
+        "usernameLabel": "Nombre de usuario",
+        "usernamePlaceholder": "Ingrese su nombre de usuario",
+        "dateLabel": "Fecha de nacimiento",
+        "datePlaceholder": "Elija una fecha",
+        "passwordLabel": "Contraseña",
+        "passwordPlaceholder": "Ingrese su contraseña",
+        "confirmPasswordLabel": "Confirme su contraseña",
+        "confirmPasswordPlaceholder": "Repita la contraseña",
+        "terms": "Declaro que he leído y acepto los términos y condiciones",
+        "singUpButtonText": "Registrarse",
+        "singInButtonText": "Iniciar sesión",
+        "loginLabel": "Inicio de sesión",
+        "loginPlaceholder": "correo electrónico o nombre de usuario"
+    }
+}
