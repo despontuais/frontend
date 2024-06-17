@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "postcss.config.mjs", "postcss.config.mjs"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "postcss.config.mjs", "postcss.config.mjs", ".unused/Input.tsx", ".unused/date-picker.tsx", ".unused/contexts/date-picker.tsx"],
   "exclude": ["node_modules"]
 }
