@@ -1,24 +1,29 @@
 "use client"
 
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./ui/card"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
 import { z } from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "./ui/button";
-import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "./ui/form";
-import { Input } from "./ui/input";
-import { Form } from "./ui/form";
+import { Button } from "@/components/ui/button"
+import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
 import axios from "axios";
+import { unstable_setRequestLocale } from "next-intl/server";
+import IPage from "@/IPage";
 import { useTranslations } from "next-intl";
-import {useRouter} from '@/navigation';
+import { useRouter } from "@/navigation";
+//import { useTranslations } from "next-intl";
+//import {useRouter} from '@/navigation';
 
 const formSchema = z.object({
     login: z.string({required_error: "Login é obrigatório"}),
     password: z.string({required_error: "Senha é obrigatória"})
 });
 
-export const LoginForm = () => {
-    const t = useTranslations();
+export const LoginForm = ({params: {locale}}: IPage) => {
+   //unstable_setRequestLocale(locale);
+     const t = useTranslations('Form');
 
     const router = useRouter();
     const handleClick = (event: React.BaseSyntheticEvent | undefined) => {
@@ -58,8 +63,8 @@ export const LoginForm = () => {
   return(
         <Card className="mt-10 w-96">
             <CardHeader>
-                <CardTitle>{t("Form.cardLoginTitle")}</CardTitle>
-                <CardDescription>{t("Form.cardLoginDescription")}</CardDescription>
+                <CardTitle>{t("cardLoginTitle")}</CardTitle>
+                <CardDescription>{t("cardLoginDescription")}</CardDescription>
             </CardHeader>
             <CardContent>
             <Form {...form}>
@@ -69,9 +74,9 @@ export const LoginForm = () => {
                         name="login"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>{t("Form.loginLabel")}</FormLabel>
+                                <FormLabel>{}</FormLabel>
                                 <FormControl>
-                                    <Input placeholder={t("Form.loginPlaceholder")} {...field} />
+                                    <Input placeholder={t("loginPlaceholder")} {...field} />
                                 </FormControl>
                                 <FormDescription>
                                 </FormDescription>
@@ -85,9 +90,9 @@ export const LoginForm = () => {
                             name="password"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>{t("Form.passwordLabel")}</FormLabel>
+                                    <FormLabel>{}</FormLabel>
                                     <FormControl>
-                                        <Input type="password" placeholder={t("Form.passwordPlaceholder")} {...field} />
+                                        <Input type="password" placeholder={t("passwordPlaceholder")} {...field} />
                                     </FormControl>
                                     <FormDescription>
                                     </FormDescription>
@@ -96,8 +101,8 @@ export const LoginForm = () => {
                             )}
                         />
                 <CardFooter className="flex justify-around">
-                    <Button type="submit">{t("Form.singInButtonText")}</Button>
-                    <Button variant={"secondary"} onClick={handleClick}>{t("Form.singUpButtonText")}</Button>
+                    <Button type="submit">{t("singInButtonText")}</Button>
+                    <Button variant={"secondary"} onClick={handleClick}>{t("singUpButtonText")}</Button>
                 </CardFooter> 
                  </form>
                 </Form>

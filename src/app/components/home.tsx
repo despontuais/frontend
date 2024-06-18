@@ -1,8 +1,8 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { Button } from "./ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from './ui/tabs';
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@nextui-org/navbar";
 import {
   DropdownMenu,
@@ -19,14 +19,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarGroup, AvatarIcon } from "@nextui-org/avatar";
-import { User } from "@nextui-org/user";
 import axios from 'axios';
-import { useRouter } from '@/navigation';
-import cronologo from "@/app/_assets/CronoLogo.png";
 import Image from 'next/image';
+import IPage from '@/IPage';
+import { useRouter } from '@/navigation';
+import cronologo from "@/app/assets/icon.png";
 
 
-export const HomePage = () => {
+export const HomePage = ({params: {locale}}: IPage) => {
+  //unstable_setRequestLocale(locale)
   const router = useRouter();
 
   interface IUser {
@@ -34,11 +35,6 @@ export const HomePage = () => {
     email: string,
     username: string
   }
-  interface ITimeline {
-    title : string[]
-  }
-
-  let timelines : ITimeline;
 
   const [userInfo, setUserInfo] = useState<IUser | null>(null);
 
@@ -58,23 +54,7 @@ export const HomePage = () => {
       }
     })();
   }, []);
-  
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await axios.get('http://localhost:4000/api/timeline/',
-          {
-            withCredentials: true,
-          });
-        if (res.data.timelines) {
-            timelines = res.data.timelines;
-            console.log(timelines)
-        }
-      } catch (err) {
-        console.error('', err);
-      }
-    })();
-  }, []);
+ 
   const handleLogout = async () => {
     try {
       await axios.post('http://localhost:4000/api/auth/logout', {
@@ -99,7 +79,7 @@ export const HomePage = () => {
     <div id="Background" className="bg-[#404040] min-h-screen p-0 ">
       <Navbar maxWidth='full' className="mb-[20px]">
         <NavbarBrand>
-          <Image src={cronologo} width={100} height={20} alt="Cronolog Logo" />
+        <Image src={cronologo} width={100} height={20} alt="Cronolog Logo" />
         </NavbarBrand>
 
         <NavbarContent className="hidden sm:flex gap-4">
@@ -110,7 +90,7 @@ export const HomePage = () => {
           <NavbarItem>
 
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+            <DropdownMenuTrigger asChild>
                 <Avatar
                   showFallback
                   isBordered

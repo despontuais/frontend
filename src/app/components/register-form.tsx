@@ -1,10 +1,10 @@
 "use client"
 
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./ui/card"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
 import { z } from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import {
     Form,
     FormControl,
@@ -15,23 +15,26 @@ import {
     FormMessage
   } from "@/components/ui/form"
   
-import { Input } from "./ui/input";
+import { Input } from "@/components/ui/input";
 
-import {useRouter} from '@/navigation';
+//import {useRouter} from '@/navigation';
 import axios from "axios";
 
 
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
-import { Calendar } from "./ui/calendar";
+import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils"
 import { ptBR } from "date-fns/locale";
-import validator from 'validator';
+import validator from "validator";
 import moment from "moment";
-import { Checkbox } from "./ui/checkbox";
+import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
+import IPage from "@/IPage";
+import { unstable_setRequestLocale } from "next-intl/server";
 import { useTranslations } from "next-intl";
+//import { useTranslations } from "next-intl";
 
 
 const FormSchema = z.object({
@@ -90,9 +93,10 @@ const FormTermsSchema = z.object({
 
 const FullFormSchema = FormSchema.and(FormTermsSchema)
 
-export const RegisterForm = () => {
-
-    const router = useRouter();
+export const RegisterForm = ({params: {locale}}: IPage) => {
+   // unstable_setRequestLocale(locale)
+    //const router = useRouter();
+    const t = useTranslations('Form');
 
     const form = useForm<z.infer<typeof FullFormSchema>>({
         resolver: zodResolver(FullFormSchema),
@@ -118,7 +122,7 @@ export const RegisterForm = () => {
                });
    
                if (res.status == 201) {
-                   router.push('/signIn');
+                //   router.push('/signIn');
                } else {
                    console.log('SingUp failed: ', res.data.error);
                }
@@ -128,14 +132,14 @@ export const RegisterForm = () => {
                
     }
 
-    const t = useTranslations();
+   // const t = useTranslations();
 
     return (
         
         <Card className="mt-5 lg:min-w-96 max-w-[420px] ">
             <CardHeader>
-                <CardTitle>{t('Form.cardTitle')}</CardTitle>
-                <CardDescription>{t('Form.cardDescription')}</CardDescription>
+                <CardTitle>{t("cardTitle")}</CardTitle>
+                <CardDescription>{t("cardDescription")}</CardDescription>
             </CardHeader>
             <CardContent>
                 <Form {...form}>
@@ -145,9 +149,9 @@ export const RegisterForm = () => {
                             name="username"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>{t('Form.usernameLabel')}</FormLabel>
+                                    <FormLabel>{t("usernameLabel")}</FormLabel>
                                     <FormControl>
-                                        <Input className="" placeholder={t('Form.usernamePlaceholder')} {...field} />
+                                        <Input className="" placeholder={t("usernamePlaceholder")} {...field} />
                                     </FormControl>
                                     <FormDescription>
                                     </FormDescription>
@@ -176,7 +180,7 @@ export const RegisterForm = () => {
                             name="birthDate"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>{t("Form.dateLabel")}</FormLabel>
+                                    <FormLabel>{t("dateLabel")}</FormLabel>
                                     <Popover>
                                         <PopoverTrigger asChild>
                                             <FormControl>
@@ -187,7 +191,7 @@ export const RegisterForm = () => {
                                                         !field.value && "text-muted-foreground"
                                                     )}
                                                 >
-                                                    {field.value ? format(field.value, "PPP", { locale: ptBR }) : <span>{t("Form.datePlaceholder")}</span>}
+                                                    {field.value ? format(field.value, "PPP", { locale: ptBR }) : <span>{t("datePlaceholder")}</span>}
                                                     <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                                                 </Button>
                                             </FormControl>
@@ -216,9 +220,9 @@ export const RegisterForm = () => {
                             name="password"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>{t("Form.passwordLabel")}</FormLabel>
+                                    <FormLabel>{t("passwordLabel")}</FormLabel>
                                     <FormControl>
-                                        <Input type="password" placeholder={t("Form.passwordPlaceholder")} {...field} />
+                                        <Input type="password" placeholder={t("passwordPlaceholder")} {...field} />
                                     </FormControl>
                                     <FormDescription>
                                     </FormDescription>
@@ -232,9 +236,9 @@ export const RegisterForm = () => {
                             name="confirmPassword"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>{t("Form.confirmPasswordPlaceholder")}</FormLabel>
+                                    <FormLabel>{t("confirmPasswordLabel")}</FormLabel>
                                     <FormControl>
-                                        <Input type="password" placeholder={t("Form.confirmPasswordLabel")} {...field} />
+                                        <Input type="password" placeholder={t("confirmPasswordPlaceholder")} {...field} />
                                     </FormControl>
                                     <FormDescription>
                                     </FormDescription>
@@ -255,7 +259,7 @@ export const RegisterForm = () => {
                                 </FormControl>
                                 <div className="space-y-1 leading-none">
                                     <FormLabel>
-                                        {t("Form.terms")}
+                                        {t("terms")}
                                     </FormLabel>
                                     <FormDescription>
                                     {/*<Link href="/examples/forms">mobile settings</Link> page.*/}
@@ -265,7 +269,7 @@ export const RegisterForm = () => {
                             )}
                             />
                         <CardFooter className="flex justify-around">
-                            <Button type="submit" variant={"default"} className="w-52">{t("Form.singUpButtonText")}</Button>
+                            <Button type="submit" variant={"default"} className="w-52">{t("singUpButtonText")}</Button>
                         </CardFooter>
                     </form>
                 </Form>
