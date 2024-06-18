@@ -14,7 +14,7 @@ const CreateTimelineForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
   const addMedia = async () => {
     try {
-      const response = await axios.post('http://localhost:4000/api/media/createMedia', {
+      const response = await axios.post('http://localhost:4001/api/media/createMedia', {
         title: mediaTitle,
         description: mediaDescription
       }, {
@@ -51,7 +51,7 @@ const CreateTimelineForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      await axios.post('http://localhost:4000/api/timeline/createTimeline', {
+      await axios.post('http://localhost:4001/api/timeline/createTimeline', {
         title: timelineTitle,
         description: timelineDescription,
         media: mediaList.map(media => media.id) // Passando IDs das mídias

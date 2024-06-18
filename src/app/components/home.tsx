@@ -61,7 +61,7 @@ export const HomePage = ({ params: { locale } }: IPage) => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get('http://localhost:4000/api/auth/me', {
+        const res = await axios.get('http://localhost:4001/api/auth/me', {
           withCredentials: true,
         });
 
@@ -78,7 +78,7 @@ export const HomePage = ({ params: { locale } }: IPage) => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get('http://localhost:4000/api/timeline/', {
+        const res = await axios.get('http://localhost:4001/api/timeline/', {
           withCredentials: true,
         });
         if (res.data.timelines) {
@@ -93,7 +93,7 @@ export const HomePage = ({ params: { locale } }: IPage) => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:4000/api/auth/logout', {}, {
+      await axios.post('http://localhost:4001/api/auth/logout', {}, {
         withCredentials: true,
       });
       router.push('/signIn');
@@ -125,14 +125,12 @@ export const HomePage = ({ params: { locale } }: IPage) => {
   const filteredTimelines = timelines.filter((timeline) =>
     timeline.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  
+  const handleAcessTimeline = (id: number) => {
+    router.push(`/${id}`);
 
-<<<<<<< Updated upstream
-=======
-  const handleAccessTimeline = (id: number) => {
-    console.log('Acessando timeline com id:', id);
-    router.push(`/timeline/${id}`);
+   
   };
->>>>>>> Stashed changes
 
   return (
     <div id="Background" className="bg-[#404040] min-h-screen p-0 ">
@@ -267,19 +265,18 @@ export const HomePage = ({ params: { locale } }: IPage) => {
         </TabsList>
         <TabsContent value="popular">
           <div id="Content" className="flex flex-wrap flex-row gap-[20px]">
-            {filteredTimelines.map((timeline, index) => (
-              <Card className="flex justify-between flex-col flex-grow-[1] flex-shrink-[1] basis-[calc(25%-20px)] p-[20px]" key={index}>
+            {filteredTimelines.map((timeline) => (
+              <Card
+                className="flex justify-between flex-col flex-grow-[1] flex-shrink-[1] basis-[calc(25%-20px)] p-[20px]"
+                key={timeline.id}
+              >
                 <CardHeader>
                   <CardTitle>{timeline.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p>{timeline.description}</p>
                 </CardContent>
-<<<<<<< Updated upstream
-                <Button>{t("Home.access")}</Button>
-=======
-                <Button onClick={() => handleAccessTimeline(timeline.id)}>Acessar</Button>
->>>>>>> Stashed changes
+                <Button onClick={() => handleAcessTimeline(timeline.id)}>Acessar</Button>
               </Card>
             ))}
           </div>
@@ -304,11 +301,7 @@ export const HomePage = ({ params: { locale } }: IPage) => {
                   <CardContent>
                     <p>{timeline.description}</p>
                   </CardContent>
-<<<<<<< Updated upstream
                   <Button>{t("Home.access")}</Button>
-=======
-                  <Button onClick={() => handleAccessTimeline(timeline.id)}>Acessar</Button>
->>>>>>> Stashed changes
                 </Card>
               ))
             )}
@@ -316,9 +309,9 @@ export const HomePage = ({ params: { locale } }: IPage) => {
         </TabsContent>
       </Tabs>
 
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
+      <ModalT isOpen={isModalOpen} onClose={closeModal}>
         <CreateTimeLineForm onClose={closeModal} />
-      </Modal>
+      </ModalT>
     </div>
   );
 };
