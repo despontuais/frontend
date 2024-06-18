@@ -11,7 +11,7 @@ export const metadata : Metadata = {
 const Page = ({params: {locale}}: IPage) => {
     unstable_setRequestLocale(locale);
     return (
-        <div className="bg-gradient-to-r from-stone-600 to-stone-950 h-screen w-full flex justify-center items-center">
+        <div className="bg-gradient-to-r from-stone-800 to-stone-950 h-screen w-full flex justify-center items-center">
             <LoginForm params={{locale}}></LoginForm>
         </div>
     )

@@ -1,7 +1,8 @@
+// src/app/home.tsx
 "use client"
 import React, { useEffect, useState } from 'react';
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@nextui-org/navbar";
 import {
@@ -11,12 +12,12 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarGroup, AvatarIcon } from "@nextui-org/avatar";
 import axios from 'axios';
 import Image from 'next/image';
 import IPage from '@/IPage';
-import { useRouter } from '@/navigation';
+import { useRouter } from '@/navigation';  // alterado aqui
 import cronologo from "@/app/assets/icon.png";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, RadioGroup, Radio } from "@nextui-org/react";
 import ModalT from '@/components/Modal';
@@ -125,6 +126,13 @@ export const HomePage = ({ params: { locale } }: IPage) => {
     timeline.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+<<<<<<< Updated upstream
+=======
+  const handleAccessTimeline = (id: number) => {
+    console.log('Acessando timeline com id:', id);
+    router.push(`/timeline/${id}`);
+  };
+>>>>>>> Stashed changes
 
   return (
     <div id="Background" className="bg-[#404040] min-h-screen p-0 ">
@@ -267,7 +275,11 @@ export const HomePage = ({ params: { locale } }: IPage) => {
                 <CardContent>
                   <p>{timeline.description}</p>
                 </CardContent>
+<<<<<<< Updated upstream
                 <Button>{t("Home.access")}</Button>
+=======
+                <Button onClick={() => handleAccessTimeline(timeline.id)}>Acessar</Button>
+>>>>>>> Stashed changes
               </Card>
             ))}
           </div>
@@ -292,7 +304,11 @@ export const HomePage = ({ params: { locale } }: IPage) => {
                   <CardContent>
                     <p>{timeline.description}</p>
                   </CardContent>
+<<<<<<< Updated upstream
                   <Button>{t("Home.access")}</Button>
+=======
+                  <Button onClick={() => handleAccessTimeline(timeline.id)}>Acessar</Button>
+>>>>>>> Stashed changes
                 </Card>
               ))
             )}
