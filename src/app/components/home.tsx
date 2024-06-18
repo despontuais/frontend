@@ -24,9 +24,9 @@ import Image from 'next/image';
 import IPage from '@/IPage';
 import { useRouter } from '@/navigation';
 import cronologo from "@/app/assets/icon.png";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, RadioGroup, Radio } from "@nextui-org/react";
 
-
-export const HomePage = ({params: {locale}}: IPage) => {
+export const HomePage = ({ params: { locale } }: IPage) => {
   //unstable_setRequestLocale(locale)
   const router = useRouter();
 
@@ -37,11 +37,12 @@ export const HomePage = ({params: {locale}}: IPage) => {
   }
 
   const [userInfo, setUserInfo] = useState<IUser | null>(null);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get('http://localhost:4000/api/auth/me',
+        const res = await axios.get('http://localhost:4001/api/auth/me',
           {
             withCredentials: true,
           });
@@ -54,10 +55,10 @@ export const HomePage = ({params: {locale}}: IPage) => {
       }
     })();
   }, []);
- 
+
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:4000/api/auth/logout', {
+      await axios.post('http://localhost:4001/api/auth/logout', {
       }, {
         withCredentials: true
       });
@@ -79,7 +80,7 @@ export const HomePage = ({params: {locale}}: IPage) => {
     <div id="Background" className="bg-[#404040] min-h-screen p-0 ">
       <Navbar maxWidth='full' className="mb-[20px]">
         <NavbarBrand>
-        <Image src={cronologo} width={100} height={20} alt="Cronolog Logo" />
+          <Image src={cronologo} width={100} height={20} alt="Cronolog Logo" />
         </NavbarBrand>
 
         <NavbarContent className="hidden sm:flex gap-4">
@@ -90,7 +91,7 @@ export const HomePage = ({params: {locale}}: IPage) => {
           <NavbarItem>
 
             <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+              <DropdownMenuTrigger asChild>
                 <Avatar
                   showFallback
                   isBordered
@@ -103,7 +104,7 @@ export const HomePage = ({params: {locale}}: IPage) => {
                 />
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
-                <DropdownMenuItem   onClick={userInfo == null ? handleLogin : showUserInfo}>
+                <DropdownMenuItem onClick={userInfo == null ? handleLogin : showUserInfo}>
                   <p
                     className="font-semibold">{userInfo ? `Signed in as ${userInfo.username}` : "Sign In"}
                   </p>
@@ -111,20 +112,20 @@ export const HomePage = ({params: {locale}}: IPage) => {
                 <DropdownMenuGroup>
                   {userInfo &&
                     <>
-                      <DropdownMenuItem>
+                      <DropdownMenuItem onClick={onOpen}>
                         <span>Profile</span>
+
                       </DropdownMenuItem>
                       <DropdownMenuItem>
                         <span>Settings</span>
                       </DropdownMenuItem>
                     </>
                   }
-
                 </DropdownMenuGroup>
                 {userInfo &&
                   <>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem  onClick={handleLogout}>
+                    <DropdownMenuItem onClick={handleLogout}>
                       <span>Log out</span>
                     </DropdownMenuItem>
                   </>
@@ -137,6 +138,40 @@ export const HomePage = ({params: {locale}}: IPage) => {
 
         </NavbarContent>
       </Navbar>
+
+
+
+      <Modal
+        size='sm'
+        isOpen={isOpen}
+        placement={'center'}
+        onOpenChange={onOpenChange}
+        isDismissable={false}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+              <ModalBody>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Nullam pulvinar risus non risus hendrerit venenatis.
+                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
+                </p>
+              </ModalBody>
+              <ModalFooter>
+                <Button variant="destructive" onClick={onClose}>
+                  Close
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+
+
+
+
 
       <Tabs defaultValue="popular" className="">
         <TabsList className="grid w-full grid-cols-2">
