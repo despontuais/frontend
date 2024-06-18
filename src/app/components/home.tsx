@@ -51,27 +51,19 @@ export const HomePage = ({ params: { locale } }: IPage) => {
   }
 
   const [userInfo, setUserInfo] = useState<IUser | null>(null);
-<<<<<<< HEAD
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-=======
+  const modalProfile = useDisclosure();
+  // const modalSettings = useDisclosure();
   const [timelines, setTimelines] = useState<ITimeline[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
->>>>>>> 24de5f68ecfc52e921328a2ae2eec5ace98e6676
 
   useEffect(() => {
     (async () => {
       try {
-<<<<<<< HEAD
-        const res = await axios.get('http://localhost:4001/api/auth/me',
-          {
-            withCredentials: true,
-          });
-=======
         const res = await axios.get('http://localhost:4000/api/auth/me', {
           withCredentials: true,
         });
->>>>>>> 24de5f68ecfc52e921328a2ae2eec5ace98e6676
+
         if (res.data) {
           console.log(res.data);
           setUserInfo(res.data);
@@ -82,13 +74,6 @@ export const HomePage = ({ params: { locale } }: IPage) => {
     })();
   }, []);
 
-<<<<<<< HEAD
-  const handleLogout = async () => {
-    try {
-      await axios.post('http://localhost:4001/api/auth/logout', {
-      }, {
-        withCredentials: true
-=======
   useEffect(() => {
     (async () => {
       try {
@@ -109,7 +94,6 @@ export const HomePage = ({ params: { locale } }: IPage) => {
     try {
       await axios.post('http://localhost:4000/api/auth/logout', {}, {
         withCredentials: true,
->>>>>>> 24de5f68ecfc52e921328a2ae2eec5ace98e6676
       });
       router.push('/signIn');
     } catch (err) {
@@ -140,6 +124,7 @@ export const HomePage = ({ params: { locale } }: IPage) => {
   const filteredTimelines = timelines.filter((timeline) =>
     timeline.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
 
   return (
     <div id="Background" className="bg-[#404040] min-h-screen p-0 ">
