@@ -9,21 +9,17 @@ import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessa
 import { Input } from "@/components/ui/input";
 import { Form } from "@/components/ui/form";
 import axios from "axios";
-import { unstable_setRequestLocale } from "next-intl/server";
 import IPage from "@/IPage";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/navigation";
-//import { useTranslations } from "next-intl";
-//import {useRouter} from '@/navigation';
 
 const formSchema = z.object({
-    login: z.string({required_error: "Login é obrigatório"}),
-    password: z.string({required_error: "Senha é obrigatória"})
+    login: z.string({ required_error: "Login é obrigatório" }),
+    password: z.string({ required_error: "Senha é obrigatória" })
 });
 
-export const LoginForm = ({params: {locale}}: IPage) => {
-   //unstable_setRequestLocale(locale);
-     const t = useTranslations('Form');
+export const LoginForm = ({ params: { locale } }: IPage) => {
+    const t = useTranslations('Form');
 
     const router = useRouter();
     const handleClick = (event: React.BaseSyntheticEvent | undefined) => {
@@ -35,20 +31,20 @@ export const LoginForm = ({params: {locale}}: IPage) => {
         resolver: zodResolver(formSchema),
     });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-     try {
-                //change localhost to http://IP_ADDRESS/ when testing on phone
-            const res = await axios.post('http://localhost:4000/api/auth/login', {
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        try {
+            //change localhost to http://IP_ADDRESS/ when testing on phone
+            const res = await axios.post('http://localhost:4001/api/auth/login', {
                 login: values.login,
                 password: values.password
             }, {
                 withCredentials: true, // Permite o envio de cookies
                 headers: {
-                    'Access-Control-Allow-Origin': '*', 
+                    'Access-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json'
                 },
             });
-            
+
             if (res.data.status) {
                 console.log(res)
                 router.push('/');
@@ -58,31 +54,31 @@ export const LoginForm = ({params: {locale}}: IPage) => {
         } catch (err) {
             console.error('Error during login: ', err);
         }
-  }
+    }
 
-  return(
+    return (
         <Card className="mt-10 w-96">
             <CardHeader>
                 <CardTitle>{t("cardLoginTitle")}</CardTitle>
                 <CardDescription>{t("cardLoginDescription")}</CardDescription>
             </CardHeader>
             <CardContent>
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                    <FormField 
-                        control={form.control}
-                        name="login"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>{}</FormLabel>
-                                <FormControl>
-                                    <Input placeholder={t("loginPlaceholder")} {...field} />
-                                </FormControl>
-                                <FormDescription>
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                        <FormField
+                            control={form.control}
+                            name="login"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>{ }</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder={t("loginPlaceholder")} {...field} />
+                                    </FormControl>
+                                    <FormDescription>
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
                         />
 
                         <FormField
@@ -90,7 +86,7 @@ export const LoginForm = ({params: {locale}}: IPage) => {
                             name="password"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>{}</FormLabel>
+                                    <FormLabel>{ }</FormLabel>
                                     <FormControl>
                                         <Input type="password" placeholder={t("passwordPlaceholder")} {...field} />
                                     </FormControl>
@@ -100,14 +96,14 @@ export const LoginForm = ({params: {locale}}: IPage) => {
                                 </FormItem>
                             )}
                         />
-                <CardFooter className="flex justify-around">
-                    <Button type="submit">{t("singInButtonText")}</Button>
-                    <Button variant={"secondary"} onClick={handleClick}>{t("singUpButtonText")}</Button>
-                </CardFooter> 
-                 </form>
+                        <CardFooter className="flex justify-around">
+                            <Button type="submit">{t("singInButtonText")}</Button>
+                            <Button variant={"secondary"} onClick={handleClick}>{t("singUpButtonText")}</Button>
+                        </CardFooter>
+                    </form>
                 </Form>
             </CardContent>
         </Card>
-  )
+    )
 
 }
