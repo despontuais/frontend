@@ -1,24 +1,21 @@
 {
-    "Index": {
-      "title": "Olá mundo!"
-    },
-    "Form": {
-      "cardLoginTitle": "Faça o Login",
-      "cardLoginDescription": "Digite seus dados de login.",
-      "cardTitle": "Faça o Cadastro",
-      "cardDescription": "Digite seus dados de cadastro.",
-      "usernameLabel": "Username",
-      "usernamePlaceholder": "Digite seu username",
-      "dateLabel": "Data de nascimento",
-      "datePlaceholder": "Escolha uma data",
-      "passwordLabel": "Senha",
-      "passwordPlaceholder": "Digite sua senha",
-      "confirmPasswordLabel": "Confirme sua senha",
-      "confirmPasswordPlaceholder": "Repita a senha",
-      "terms": "Declaro que li e aceito os termos e condições",
-      "singUpButtonText": "Cadastrar",
-      "singInButtonText": "Login",
-      "loginLabel": "Login",
-      "loginPlaceholder": "e-mail ou username"
-    }
+  "Form": {
+    "cardLoginTitle": "Faça o Login",
+    "cardLoginDescription": "Digite seus dados de login.",
+    "cardTitle": "Faça o Cadastro",
+    "cardDescription": "Digite seus dados de cadastro.",
+    "usernameLabel": "Username",
+    "usernamePlaceholder": "Digite seu username",
+    "dateLabel": "Data de nascimento",
+    "datePlaceholder": "Escolha uma data",
+    "passwordLabel": "Senha",
+    "passwordPlaceholder": "Digite sua senha",
+    "confirmPasswordLabel": "Confirme sua senha",
+    "confirmPasswordPlaceholder": "Repita a senha",
+    "terms": "Declaro que li e aceito os termos e condições",
+    "singUpButtonText": "Cadastrar",
+    "singInButtonText": "Login",
+    "loginLabel": "Login",
+    "loginPlaceholder": "e-mail ou username"
   }
+}

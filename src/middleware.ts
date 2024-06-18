@@ -1,8 +1,5 @@
 import createIntlMiddleware from 'next-intl/middleware';
 import { locales } from './config'; 
-import { match } from '@formatjs/intl-localematcher';
-import Negotiator from 'negotiator';
-import { NextResponse } from 'next/server'
 import { NextRequest } from 'next/server'
 
 export default async function middleware(request: NextRequest) {
