@@ -31,20 +31,20 @@ export const LoginForm = ({ params: { locale } }: IPage) => {
         resolver: zodResolver(formSchema),
     });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-     try {
-                //change localhost to http://IP_ADDRESS/ when testing on phone
-            const res = await axios.post('http://localhost:4000/api/auth/login', {
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        try {
+            //change localhost to http://IP_ADDRESS/ when testing on phone
+            const res = await axios.post('http://localhost:4001/api/auth/login', {
                 login: values.login,
                 password: values.password
             }, {
                 withCredentials: true, // Permite o envio de cookies
                 headers: {
-                    'Access-Control-Allow-Origin': '*', 
+                    'Access-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json'
                 },
             });
-            
+
             if (res.data.status) {
                 console.log(res)
                 router.push('/');
