@@ -1,24 +1,50 @@
 {
-    "Index": {
-      "title": "Olá mundo!"
-    },
-    "Form": {
-      "cardLoginTitle": "Login",
-      "cardLoginDescription": "Enter your login details.",
-      "cardTitle": "Register",
-      "cardDescription": "Enter your registration details.",
-      "usernameLabel": "Username",
-      "usernamePlaceholder": "Enter your username",
-      "dateLabel": "Date of Birth",
-      "datePlaceholder": "Choose a date",
-      "passwordLabel": "Password",
-      "passwordPlaceholder": "Enter your password",
-      "confirmPasswordLabel": "Confirm your password",
-      "confirmPasswordPlaceholder": "Repeat the password",
-      "terms": "I declare that I have read and accept the terms and conditions",
-      "singUpButtonText": "Sign Up",
-      "singInButtonText": "Sign in",
-      "loginLabel": "Login",
-      "loginPlaceholder": "email or username"
+  "Form": {
+    "cardLoginTitle": "Log In",
+    "cardLoginDescription": "Enter your login details.",
+    "cardTitle": "Sign Up",
+    "cardDescription": "Enter your registration details.",
+    "usernameLabel": "Username",
+    "usernamePlaceholder": "Enter your username",
+    "emailLabel": "E-mail",
+    "dateLabel": "Date of Birth",
+    "datePlaceholder": "Choose a date",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Repeat the password",
+    "terms": "I declare that I have read and accept the terms and conditions",
+    "singUpButtonText": "Sign Up",
+    "singInButtonText": "Log In",
+    "loginLabel": "Login",
+    "loginPlaceholder": "e-mail or username"
+  },
+  "Home": {
+    "createTimeline": "Create Timeline",
+    "signedAs": "Logged in as: ",
+    "SignIn": "Sign In",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Log Out",
+    "popular": "POPULAR",
+    "search": "SEARCH",
+    "searchPlaceholder": "Search timelines...",
+    "access": "Access",
+    "noTimeline": "No timeline found with the term ",
+    "userInfo": "User Data"
+  },
+    "Validation": {
+      "usernameRequired": "Username is required",
+      "usernameLength": "Username must be between 3 and 15 characters",
+      "usernameSpecial": "Username cannot contain special characters",
+      "passwordRequired": "Password is required",
+      "passwordLength": "Password must be at least 6 characters long",
+      "passwordSpecial": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+      "confirmPasswordRequired": "Password confirmation is required",
+      "passwordMismatch": "Passwords do not match",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email format",
+      "birthdateRequired": "Date of birth is required",
+      "birthdateTooYoung": "You must be at least 18 years old to register"
     }
-  }
+}

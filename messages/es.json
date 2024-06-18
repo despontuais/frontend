@@ -1,21 +1,51 @@
 {
-    "Form":{
-        "cardLoginTitle": "Iniciar sesión",
-        "cardLoginDescription": "Ingrese sus datos de inicio de sesión.",
-        "cardTitle": "Registrarse",
-        "cardDescription": "Ingrese sus datos de registro.",
-        "usernameLabel": "Nombre de usuario",
-        "usernamePlaceholder": "Ingrese su nombre de usuario",
-        "dateLabel": "Fecha de nacimiento",
-        "datePlaceholder": "Elija una fecha",
-        "passwordLabel": "Contraseña",
-        "passwordPlaceholder": "Ingrese su contraseña",
-        "confirmPasswordLabel": "Confirme su contraseña",
-        "confirmPasswordPlaceholder": "Repita la contraseña",
-        "terms": "Declaro que he leído y acepto los términos y condiciones",
-        "singUpButtonText": "Registrarse",
-        "singInButtonText": "Iniciar sesión",
-        "loginLabel": "Inicio de sesión",
-        "loginPlaceholder": "correo electrónico o nombre de usuario"
-    }
+    "Form": {
+      "cardLoginTitle": "Iniciar sesión",
+      "cardLoginDescription": "Ingrese sus datos de inicio de sesión.",
+      "cardTitle": "Registrarse",
+      "cardDescription": "Ingrese sus datos de registro.",
+      "usernameLabel": "Nombre de usuario",
+      "usernamePlaceholder": "Ingrese su nombre de usuario",
+      "emailLabel": "Correo electrónico",
+      "dateLabel": "Fecha de nacimiento",
+      "datePlaceholder": "Elija una fecha",
+      "passwordLabel": "Contraseña",
+      "passwordPlaceholder": "Ingrese su contraseña",
+      "confirmPasswordLabel": "Confirmar contraseña",
+      "confirmPasswordPlaceholder": "Repita la contraseña",
+      "terms": "Declaro que he leído y acepto los términos y condiciones",
+      "singUpButtonText": "Registrarse",
+      "singInButtonText": "Iniciar sesión",
+      "loginLabel": "Inicio de sesión",
+      "loginPlaceholder": "correo electrónico o nombre de usuario"
+    },
+    "Home": {
+      "createTimeline": "Crear línea de tiempo",
+      "signedAs": "Conectado como: ",
+      "SignIn": "Iniciar sesión",
+      "profile": "Perfil",
+      "settings": "Configuraciones",
+      "logout": "Cerrar sesión",
+      "popular": "POPULAR",
+      "search": "BUSCAR",
+      "searchPlaceholder": "Buscar líneas de tiempo...",
+      "access": "Acceder",
+      "noTimeline": "No se encontró ninguna línea de tiempo con el término ",
+      "userInfo": "Datos del Usuario"
+    },
+    "Validation": {
+        "usernameRequired": "Nombre de usuario es obligatorio",
+        "usernameLength": "El nombre de usuario debe tener entre 3 y 15 caracteres",
+        "usernameSpecial": "El nombre de usuario no puede contener caracteres especiales",
+        "passwordRequired": "La contraseña es obligatoria",
+        "passwordLength": "La contraseña debe tener al menos 6 caracteres",
+        "passwordSpecial": "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial",
+        "confirmPasswordRequired": "Es obligatoria la confirmación de la contraseña",
+        "passwordMismatch": "Las contraseñas no coinciden",
+        "emailRequired": "El correo electrónico es obligatorio",
+        "emailInvalid": "Formato de correo electrónico inválido",
+        "birthdateRequired": "La fecha de nacimiento es obligatoria",
+        "birthdateTooYoung": "Debes tener al menos 18 años para registrarte"
+  }
 }
+  

@@ -4,8 +4,9 @@
     "cardLoginDescription": "Digite seus dados de login.",
     "cardTitle": "Faça o Cadastro",
     "cardDescription": "Digite seus dados de cadastro.",
-    "usernameLabel": "Username",
+    "usernameLabel": "Nome de usuário",
     "usernamePlaceholder": "Digite seu username",
+    "emailLabel": "E-mail",
     "dateLabel": "Data de nascimento",
     "datePlaceholder": "Escolha uma data",
     "passwordLabel": "Senha",
@@ -17,5 +18,33 @@
     "singInButtonText": "Login",
     "loginLabel": "Login",
     "loginPlaceholder": "e-mail ou username"
+  },
+  "Home": {
+    "createTimeline": "Criar Timeline",
+    "signedAs": "Logado como: ",
+    "SignIn": "Iniciar sessão",
+    "profile": "Perfil",
+    "settings": "Configurações",
+    "logout": "Desconectar",
+    "popular": "POPULARES",
+    "search": "PESQUISA",
+    "searchPlaceholder": "Buscar timelines...",
+    "access": "Acessar",
+    "noTimeline": "Nenhuma timeline encontrada com o termo ",
+    "userInfo": "Informações do Usuário"
+  },
+  "Validation": {
+    "usernameRequired": "Nome de usuário é obrigatório",
+    "usernameLength": "Nome de usuário deve ter entre 3 e 15 caracteres",
+    "usernameSpecial": "Nome de usuário não pode conter caracteres especiais",
+    "passwordRequired": "Senha é obrigatória",
+    "passwordLength": "A senha deve ter pelo menos 6 caracteres",
+    "passwordSpecial": "A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial",
+    "confirmPasswordRequired": "Confirmação de senha é obrigatória", 
+    "passwordMismatch": "As senhas não coincidem",
+    "emailRequired": "E-mail é obrigatório",
+    "emailInvalid": "Formato de e-mail inválido",
+    "birthdateRequired": "Data de nascimento é obrigatória",
+    "birthdateTooYoung": "Você deve ter ao menos 18 anos se cadastrar"
   }
 }

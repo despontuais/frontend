@@ -1,9 +1,9 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@nextui-org/navbar";
+import { Button } from "./ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from './ui/tabs';
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/navbar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,22 +11,16 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarGroup, AvatarIcon } from "@nextui-org/avatar";
+} from "@/components/ui/dropdown-menu";
+import { Avatar } from "@nextui-org/avatar";
 import axios from 'axios';
-import Image from 'next/image';
-import IPage from '@/IPage';
 import { useRouter } from '@/navigation';
+import Image from 'next/image';
+import Modal from './Modal';
+import CreateTimelineForm from './CreateTimeLineForm';
 import cronologo from "@/app/assets/icon.png";
-<<<<<<< HEAD
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, RadioGroup, Radio } from "@nextui-org/react";
-=======
-import Modal from '@/components/Modal';
-import CreateTimeLineForm from '@/components/CreateTimeLineForm';
->>>>>>> 24de5f68ecfc52e921328a2ae2eec5ace98e6676
 
-export const HomePage = ({ params: { locale } }: IPage) => {
-  //unstable_setRequestLocale(locale)
+export const HomePage = () => {
   const router = useRouter();
 
   interface IUser {
@@ -42,27 +36,16 @@ export const HomePage = ({ params: { locale } }: IPage) => {
   }
 
   const [userInfo, setUserInfo] = useState<IUser | null>(null);
-<<<<<<< HEAD
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-=======
   const [timelines, setTimelines] = useState<ITimeline[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
->>>>>>> 24de5f68ecfc52e921328a2ae2eec5ace98e6676
 
   useEffect(() => {
     (async () => {
       try {
-<<<<<<< HEAD
-        const res = await axios.get('http://localhost:4001/api/auth/me',
-          {
-            withCredentials: true,
-          });
-=======
         const res = await axios.get('http://localhost:4000/api/auth/me', {
           withCredentials: true,
         });
->>>>>>> 24de5f68ecfc52e921328a2ae2eec5ace98e6676
         if (res.data) {
           console.log(res.data);
           setUserInfo(res.data);
@@ -73,13 +56,6 @@ export const HomePage = ({ params: { locale } }: IPage) => {
     })();
   }, []);
 
-<<<<<<< HEAD
-  const handleLogout = async () => {
-    try {
-      await axios.post('http://localhost:4001/api/auth/logout', {
-      }, {
-        withCredentials: true
-=======
   useEffect(() => {
     (async () => {
       try {
@@ -100,7 +76,6 @@ export const HomePage = ({ params: { locale } }: IPage) => {
     try {
       await axios.post('http://localhost:4000/api/auth/logout', {}, {
         withCredentials: true,
->>>>>>> 24de5f68ecfc52e921328a2ae2eec5ace98e6676
       });
       router.push('/signIn');
     } catch (err) {
@@ -160,20 +135,13 @@ export const HomePage = ({ params: { locale } }: IPage) => {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
                 <DropdownMenuItem onClick={userInfo == null ? handleLogin : showUserInfo}>
-<<<<<<< HEAD
-                  <p
-                    className="font-semibold">{userInfo ? `Signed in as ${userInfo.username}` : "Sign In"}
-                  </p>
-=======
                   <p className="font-semibold">{userInfo ? `Signed in as ${userInfo.username}` : "Sign In"}</p>
->>>>>>> 24de5f68ecfc52e921328a2ae2eec5ace98e6676
                 </DropdownMenuItem>
                 <DropdownMenuGroup>
                   {userInfo &&
                     <>
-                      <DropdownMenuItem onClick={onOpen}>
+                      <DropdownMenuItem>
                         <span>Profile</span>
-
                       </DropdownMenuItem>
                       <DropdownMenuItem>
                         <span>Settings</span>
@@ -194,40 +162,6 @@ export const HomePage = ({ params: { locale } }: IPage) => {
           </NavbarItem>
         </NavbarContent>
       </Navbar>
-
-
-
-      <Modal
-        size='sm'
-        isOpen={isOpen}
-        placement={'center'}
-        onOpenChange={onOpenChange}
-        isDismissable={false}
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
-              <ModalBody>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-              </ModalBody>
-              <ModalFooter>
-                <Button variant="destructive" onClick={onClose}>
-                  Close
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-
-
-
-
 
       <Tabs defaultValue="popular" className="">
         <TabsList className="grid w-full grid-cols-2">
@@ -278,7 +212,7 @@ export const HomePage = ({ params: { locale } }: IPage) => {
       </Tabs>
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <CreateTimeLineForm onClose={closeModal} />
+        <CreateTimelineForm onClose={closeModal} />
       </Modal>
     </div>
   );
