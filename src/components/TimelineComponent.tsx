@@ -1,47 +1,77 @@
-// components/TimelineComponent.tsx
-"use client"
-import { usePathname, useRouter } from '@/navigation';
-import React, { useEffect, useState} from 'react';
+// @ts-nocheck
 
+// components/TimelineComponent.tsx
+
+"use client";
+import axios from 'axios';
+import { usePathname, useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+ // @ts-nocheck
 interface ITimeline {
   id: number;
   title: string;
   description: string;
 }
 
-type TimelineComponentProps = {
-  timeline: any;
-};
+const TimelineComponent: React.FC = () => {
 
-const TimelineComponent = () => {
-  const PATHNAME = usePathname()
+  async function fetchData() {
+    try {
+      const id = pathname.replace(/.*\D/g, "")
+      const response = await fetch(`https://cronolog.duckdns.org/api/timeline/35}`); // Replace with your actual endpoint
+      const data = await response.json();
+      console.log(data)
+      return data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      // Handle error appropriately (e.g., return an empty array or error object)
+      return []; // Example: Return an empty array on error
+    }
+  }
+
+  const pathname = usePathname();
   const router = useRouter();
-  const [timelines, setTimelines] = useState<ITimeline[]>([]);
+ const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-    (async () => {
+    const fetchDataAsync = async () => {
+      setIsLoading(true);
       try {
-      console.log(PATHNAME)
-          
-        
-
-        
-      } catch (err) {
-        console.error('Falha ao buscar informações do usuário', err);
+        const fetchedData = await fetchData();
+        setData(fetchedData.timeline); // Assuming "timeline" is the key with your data
+      } catch (error) {
+      } finally {
+        setIsLoading(false);
       }
-    })();
-  }, []);
+    };
 
-  if (!timelines) {
+    fetchDataAsync();
+    console.log(data)
+  },[]);
+
+  // ... rest of your component logic
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!data.length) {
     return <p>No timeline data available.</p>;
   }
 
   return (
     <div>
-      <h1>{timelines.title || 'No Title'}</h1>
-      <p>{timelines.description || 'No Description'}</p>
-      {/* add outros dados da tl */}
+      {isLoading && <p>Loading data...</p>}
+      {data.length > 0 && (
+        <ul>
+          {data.map((item) => (
+            <li key={item.media_timeline_id}>
+              { item.media.title} ({item.timeline.title})
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
-};
-
+}
 export default TimelineComponent;

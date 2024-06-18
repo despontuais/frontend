@@ -78,37 +78,22 @@ export const RegisterForm = ({ params: { locale } }: IPage) => {
             }
         });
 
-    const FormTermsSchema = z.object({
-        terms: z.boolean(),
-
-    }).superRefine((data, ctx) => {
-        if (data.terms === false) {
-            ctx.addIssue({
-                code: "custom",
-                path: ["terms"],
-            })
-        }
-    });
 
 
-    const FullFormSchema = FormSchema.and(FormTermsSchema)
 
 
 
 
     const router = useRouter();
 
-    const form = useForm<z.infer<typeof FullFormSchema>>({
-        resolver: zodResolver(FullFormSchema),
-        defaultValues: {
-            terms: false,
-        },
+    const form = useForm<z.infer<typeof FormSchema>>({
+        resolver: zodResolver(FormSchema),
     });
-    const onSubmit = async (values: z.infer<typeof FullFormSchema>) => {
+    const onSubmit = async (values: z.infer<typeof FormSchema>) => {
         try {
             //change localhost to http://IP_ADDRESS/ when testing on phone
 
-            const res = await axios.post('http://localhost:4000/api/auth/signUp', {
+            const res = await axios.post('https://cronolog.duckdns.org/api/auth/signUp', {
                 username: values.username,
                 email: values.email,
                 password: values.password,
@@ -243,28 +228,6 @@ export const RegisterForm = ({ params: { locale } }: IPage) => {
                                     <FormDescription>
                                     </FormDescription>
                                     <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="terms"
-                            render={({ field }) => (
-                                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                                    <FormControl>
-                                        <Checkbox
-                                            checked={field.value}
-                                            onCheckedChange={field.onChange}
-                                        />
-                                    </FormControl>
-                                    <div className="space-y-1 leading-none">
-                                        <FormLabel>
-                                            {t("Form.terms")}
-                                        </FormLabel>
-                                        <FormDescription>
-                                            {/*<Link href="/examples/forms">mobile settings</Link> page.*/}
-                                        </FormDescription>
-                                    </div>
                                 </FormItem>
                             )}
                         />

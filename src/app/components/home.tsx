@@ -61,12 +61,11 @@ export const HomePage = ({ params: { locale } }: IPage) => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get('http://localhost:4001/api/auth/me', {
+        const res = await axios.get('https://cronolog.duckdns.org/api/auth/me', {
           withCredentials: true,
         });
 
         if (res.data) {
-          console.log(res.data);
           setUserInfo(res.data);
         }
       } catch (err) {
@@ -78,12 +77,11 @@ export const HomePage = ({ params: { locale } }: IPage) => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get('http://localhost:4001/api/timeline/', {
+        const res = await axios.get('https://cronolog.duckdns.org/api/timeline/', {
           withCredentials: true,
         });
         if (res.data.timelines) {
           setTimelines(res.data.timelines);
-          console.log(res.data.timelines);
         }
       } catch (err) {
         console.error('Erro ao buscar timelines', err);
@@ -93,7 +91,7 @@ export const HomePage = ({ params: { locale } }: IPage) => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:4001/api/auth/logout', {}, {
+      await axios.post('https://cronolog.duckdns.org/api/auth/logout', {}, {
         withCredentials: true,
       });
       router.push('/signIn');
@@ -127,7 +125,7 @@ export const HomePage = ({ params: { locale } }: IPage) => {
   );
   
   const handleAcessTimeline = (id: number) => {
-    router.push(`/${id}`);
+    router.push(`/timeline/${id}`);
 
    
   };
@@ -222,7 +220,6 @@ export const HomePage = ({ params: { locale } }: IPage) => {
               </ModalBody>
               <ModalFooter>
                 <Button variant="destructive" onClick={onClose}>
-                  Close
                 </Button>
               </ModalFooter>
             </>

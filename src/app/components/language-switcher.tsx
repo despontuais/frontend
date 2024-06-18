@@ -21,8 +21,8 @@ export function LanguageToggle() {
     const { setTheme } = useTheme()
     const router = useRouter();
     const pathname = usePathname();
-
     function capitalizeFirstLetter(string: string) {
+        console.log(pathname.toString())
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 

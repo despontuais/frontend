@@ -34,7 +34,7 @@ export const LoginForm = ({ params: { locale } }: IPage) => {
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             //change localhost to http://IP_ADDRESS/ when testing on phone
-            const res = await axios.post('http://localhost:4001/api/auth/login', {
+            const res = await axios.post('https://cronolog.duckdns.org/api/auth/login', {
                 login: values.login,
                 password: values.password
             }, {

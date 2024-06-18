@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Moon, Sun } from "lucide-react"
+import { Moon, Sun, Computer } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
@@ -11,10 +11,11 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useTranslations } from "next-intl"
 
 export function ModeToggle() {
     const { setTheme } = useTheme()
-
+    const t = useTranslations();
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -26,12 +27,17 @@ export function ModeToggle() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => setTheme("light")}>
+                    <Sun className="mr-2 h-4 w-4 rotate-0 scale-100 transition-all " />
+
                     Light
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("dark")}>
+                    <Moon className="mr-2 h-4 w-4  transition-all dark:rotate-0 dark:scale-100" />
+
                     Dark
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("system")}>
+                    <Computer className="mr-2 h-4 w-4  transition-all dark:rotate-0 dark:scale-100"></Computer>
                     System
                 </DropdownMenuItem>
             </DropdownMenuContent>
