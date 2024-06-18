@@ -282,7 +282,7 @@ export const HomePage = ({ params: { locale } }: IPage) => {
               className="p-2 border border-gray-300 rounded-md w-full"
             />
             {filteredTimelines.length === 0 ? (
-              <p>{t("Home.noTimeline")} "{searchTerm}".</p>
+              <p>{t("Home.noTimeline")} {`"${searchTerm}"`}.</p>
             ) : (
               filteredTimelines.map((timeline, index) => (
                 <Card key={index}>
