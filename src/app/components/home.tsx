@@ -18,21 +18,30 @@ import Image from 'next/image';
 import IPage from '@/IPage';
 import { useRouter } from '@/navigation';
 import cronologo from "@/app/assets/icon.png";
-<<<<<<< HEAD
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, RadioGroup, Radio } from "@nextui-org/react";
-=======
-import Modal from '@/components/Modal';
+import ModalT from '@/components/Modal';
 import CreateTimeLineForm from '@/components/CreateTimeLineForm';
->>>>>>> 24de5f68ecfc52e921328a2ae2eec5ace98e6676
+import 'moment/locale/es'
+import { ModeToggle } from '@/app/components/mode-switcher';
+import {
+  LogOut,
+  Settings,
+  User
+} from "lucide-react"
+import { useFormatter, useTranslations } from 'next-intl';
+import { LanguageToggle } from './language-switcher';
 
 export const HomePage = ({ params: { locale } }: IPage) => {
   //unstable_setRequestLocale(locale)
   const router = useRouter();
+  const formatter = useFormatter();
+  const t = useTranslations();
 
   interface IUser {
     id: number;
     email: string;
     username: string;
+    birthDate: string;
   }
 
   interface ITimeline {
@@ -140,10 +149,16 @@ export const HomePage = ({ params: { locale } }: IPage) => {
         </NavbarBrand>
 
         <NavbarContent className="hidden sm:flex gap-4">
-          {userInfo && (<Button onClick={handleCreateTimeline}>Criar Timeline</Button>)}
+          {userInfo && (<Button onClick={handleCreateTimeline}>{t("Home.createTimeline")}</Button>)}
         </NavbarContent>
 
         <NavbarContent justify='end'>
+          <NavbarItem>
+            <LanguageToggle></LanguageToggle>
+          </NavbarItem>
+          <NavbarItem>
+            <ModeToggle></ModeToggle>
+          </NavbarItem>
           <NavbarItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -160,23 +175,19 @@ export const HomePage = ({ params: { locale } }: IPage) => {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
                 <DropdownMenuItem onClick={userInfo == null ? handleLogin : showUserInfo}>
-<<<<<<< HEAD
-                  <p
-                    className="font-semibold">{userInfo ? `Signed in as ${userInfo.username}` : "Sign In"}
-                  </p>
-=======
-                  <p className="font-semibold">{userInfo ? `Signed in as ${userInfo.username}` : "Sign In"}</p>
->>>>>>> 24de5f68ecfc52e921328a2ae2eec5ace98e6676
+                  <p className="font-semibold">{userInfo ? `${t("Home.signedAs")} ${userInfo.username}` : t("Home.SignIn")}</p>
                 </DropdownMenuItem>
                 <DropdownMenuGroup>
                   {userInfo &&
                     <>
-                      <DropdownMenuItem onClick={onOpen}>
-                        <span>Profile</span>
+                      <DropdownMenuItem onClick={modalProfile.onOpen}>
+                        <User className="mr-2 h-4 w-4" />
+                        <span>{t("Home.profile")}</span>
 
                       </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <span>Settings</span>
+                      <DropdownMenuItem >
+                        <Settings className="mr-2 h-4 w-4" />
+                        <span>{t("Home.settings")}</span>
                       </DropdownMenuItem>
                     </>
                   }
@@ -184,8 +195,9 @@ export const HomePage = ({ params: { locale } }: IPage) => {
                 {userInfo &&
                   <>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={handleLogout}>
-                      <span>Log out</span>
+                    <DropdownMenuItem onClick={handleLogout} >
+                      <LogOut className="mr-2 h-4 w-4" />
+                      <span>{t("Home.logout")}</span>
                     </DropdownMenuItem>
                   </>
                 }
@@ -195,24 +207,26 @@ export const HomePage = ({ params: { locale } }: IPage) => {
         </NavbarContent>
       </Navbar>
 
-
-
       <Modal
-        size='sm'
-        isOpen={isOpen}
+        size='xs'
+        isOpen={modalProfile.isOpen}
         placement={'center'}
-        onOpenChange={onOpenChange}
+        onOpenChange={modalProfile.onOpenChange}
         isDismissable={false}
       >
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1 text-center">{t("Home.userInfo")}</ModalHeader>
               <ModalBody>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
+                  {t("Form.usernameLabel")}: {userInfo?.username}
+                </p>
+                <p>
+                  {t("Form.emailLabel")}: {userInfo?.email}
+                </p>
+                <p>
+                  {t("Form.dateLabel")}: {formatter.dateTime(new Date(userInfo?.birthDate as string), 'short')}
                 </p>
               </ModalBody>
               <ModalFooter>
@@ -225,26 +239,50 @@ export const HomePage = ({ params: { locale } }: IPage) => {
         </ModalContent>
       </Modal>
 
+      { /*     <Modal
+        size='xs'
+        isOpen={modalSettings.isOpen}
+        placement={'center'}
+        onOpenChange={modalSettings.onOpenChange}
+        isDismissable={false}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1 text-center">{"Configurações do Usuário"}</ModalHeader>
+              <ModalBody>
+                <span className='font-bold'>Theme: </span><ModeToggle />
+                <span className='font-bold'>Language: </span><LanguageToggle />
 
+              </ModalBody>
+              <ModalFooter>
+                <Button variant="destructive" onClick={onClose}>
+                  Close
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>*/}
 
 
 
       <Tabs defaultValue="popular" className="">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="popular">POPULARES</TabsTrigger>
-          <TabsTrigger value="search">PESQUISA</TabsTrigger>
+          <TabsTrigger value="popular">{t("Home.popular")}</TabsTrigger>
+          <TabsTrigger value="search">{t("Home.search")}</TabsTrigger>
         </TabsList>
         <TabsContent value="popular">
           <div id="Content" className="flex flex-wrap flex-row gap-[20px]">
-            {filteredTimelines.map((timeline) => (
-              <Card className="flex justify-between flex-col flex-grow-[1] flex-shrink-[1] basis-[calc(25%-20px)] p-[20px]" key={timeline.id}>
+            {filteredTimelines.map((timeline, index) => (
+              <Card className="flex justify-between flex-col flex-grow-[1] flex-shrink-[1] basis-[calc(25%-20px)] p-[20px]" key={index}>
                 <CardHeader>
                   <CardTitle>{timeline.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p>{timeline.description}</p>
                 </CardContent>
-                <Button>Acessar</Button>
+                <Button>{t("Home.access")}</Button>
               </Card>
             ))}
           </div>
@@ -253,23 +291,23 @@ export const HomePage = ({ params: { locale } }: IPage) => {
           <div id="Content" className="flex flex-col gap-4 p-4">
             <input
               type="text"
-              placeholder="Buscar timelines..."
+              placeholder={t("Home.searchPlaceholder")}
               value={searchTerm}
               onChange={handleSearchTermChange}
               className="p-2 border border-gray-300 rounded-md w-full"
             />
             {filteredTimelines.length === 0 ? (
-              <p>Nenhuma timeline encontrada com o termo "{searchTerm}".</p>
+              <p>{t("Home.noTimeline")} "{searchTerm}".</p>
             ) : (
-              filteredTimelines.map((timeline) => (
-                <Card key={timeline.id}>
+              filteredTimelines.map((timeline, index) => (
+                <Card key={index}>
                   <CardHeader>
                     <CardTitle>{timeline.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p>{timeline.description}</p>
                   </CardContent>
-                  <Button>Acessar</Button>
+                  <Button>{t("Home.access")}</Button>
                 </Card>
               ))
             )}

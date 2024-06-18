@@ -106,40 +106,40 @@ export const RegisterForm = ({params: {locale}}: IPage) => {
     });
     const onSubmit = async (values: z.infer<typeof FullFormSchema>) => {
         try {
-                            //change localhost to http://IP_ADDRESS/ when testing on phone
+            //change localhost to http://IP_ADDRESS/ when testing on phone
 
-               const res = await axios.post('http://localhost:4000/api/auth/signUp', {
-                   username: values.username,
-                   email: values.email,
-                   password: values.password,
-                   birthDate: values.birthDate
-               }, {
-                   withCredentials: true, // Permite o envio de cookies
-                   headers: {
-                       'Access-Control-Allow-Origin': '*', 
-                       'Content-Type': 'application/json'
-                   },
-               });
-   
-               if (res.status == 201) {
-                //   router.push('/signIn');
-               } else {
-                   console.log('SingUp failed: ', res.data.error);
-               }
-           } catch (err) {
-               console.error('Error during login: ', err);
-           }
-               
+            const res = await axios.post('http://localhost:4000/api/auth/signUp', {
+                username: values.username,
+                email: values.email,
+                password: values.password,
+                birthDate: values.birthDate
+            }, {
+                withCredentials: true, // Permite o envio de cookies
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json'
+                },
+            });
+
+            if (res.status == 201) {
+                router.push('/signIn');
+            } else {
+                console.log('SingUp failed: ', res.data.error);
+            }
+        } catch (err) {
+            console.error('Error during login: ', err);
+        }
+
     }
 
-   // const t = useTranslations();
+    // const t = useTranslations();
 
     return (
-        
+
         <Card className="mt-5 lg:min-w-96 max-w-[420px] ">
             <CardHeader>
-                <CardTitle>{t("cardTitle")}</CardTitle>
-                <CardDescription>{t("cardDescription")}</CardDescription>
+                <CardTitle>{t("Form.cardTitle")}</CardTitle>
+                <CardDescription>{t("Form.cardDescription")}</CardDescription>
             </CardHeader>
             <CardContent>
                 <Form {...form}>
@@ -149,9 +149,9 @@ export const RegisterForm = ({params: {locale}}: IPage) => {
                             name="username"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>{t("usernameLabel")}</FormLabel>
+                                    <FormLabel>{t("Form.usernameLabel")}</FormLabel>
                                     <FormControl>
-                                        <Input className="" placeholder={t("usernamePlaceholder")} {...field} />
+                                        <Input className="" placeholder={t("Form.usernamePlaceholder")} {...field} />
                                     </FormControl>
                                     <FormDescription>
                                     </FormDescription>
@@ -164,7 +164,7 @@ export const RegisterForm = ({params: {locale}}: IPage) => {
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Email</FormLabel>
+                                    <FormLabel>{t("Form.emailLabel")}</FormLabel>
                                     <FormControl>
                                         <Input placeholder="Ex: cronologger@gmail.com" {...field} />
                                     </FormControl>
@@ -180,7 +180,7 @@ export const RegisterForm = ({params: {locale}}: IPage) => {
                             name="birthDate"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>{t("dateLabel")}</FormLabel>
+                                    <FormLabel>{t("Form.dateLabel")}</FormLabel>
                                     <Popover>
                                         <PopoverTrigger asChild>
                                             <FormControl>
@@ -191,7 +191,7 @@ export const RegisterForm = ({params: {locale}}: IPage) => {
                                                         !field.value && "text-muted-foreground"
                                                     )}
                                                 >
-                                                    {field.value ? format(field.value, "PPP", { locale: ptBR }) : <span>{t("datePlaceholder")}</span>}
+                                                    {field.value ? format(field.value, "PPP", { locale: ptBR }) : <span>{t("Form.datePlaceholder")}</span>}
                                                     <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                                                 </Button>
                                             </FormControl>
@@ -220,9 +220,9 @@ export const RegisterForm = ({params: {locale}}: IPage) => {
                             name="password"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>{t("passwordLabel")}</FormLabel>
+                                    <FormLabel>{t("Form.passwordLabel")}</FormLabel>
                                     <FormControl>
-                                        <Input type="password" placeholder={t("passwordPlaceholder")} {...field} />
+                                        <Input type="password" placeholder={t("Form.passwordPlaceholder")} {...field} />
                                     </FormControl>
                                     <FormDescription>
                                     </FormDescription>
@@ -230,15 +230,15 @@ export const RegisterForm = ({params: {locale}}: IPage) => {
                                 </FormItem>
                             )}
                         />
-                  
+
                         <FormField
                             control={form.control}
                             name="confirmPassword"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>{t("confirmPasswordLabel")}</FormLabel>
+                                    <FormLabel>{t("Form.confirmPasswordLabel")}</FormLabel>
                                     <FormControl>
-                                        <Input type="password" placeholder={t("confirmPasswordPlaceholder")} {...field} />
+                                        <Input type="password" placeholder={t("Form.confirmPasswordPlaceholder")} {...field} />
                                     </FormControl>
                                     <FormDescription>
                                     </FormDescription>
@@ -251,25 +251,25 @@ export const RegisterForm = ({params: {locale}}: IPage) => {
                             name="terms"
                             render={({ field }) => (
                                 <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                                <FormControl>
-                                    <Checkbox
-                                    checked={field.value}
-                                    onCheckedChange={field.onChange}
-                                    />
-                                </FormControl>
-                                <div className="space-y-1 leading-none">
-                                    <FormLabel>
-                                        {t("terms")}
-                                    </FormLabel>
-                                    <FormDescription>
-                                    {/*<Link href="/examples/forms">mobile settings</Link> page.*/}
-                                    </FormDescription>
-                                </div>
+                                    <FormControl>
+                                        <Checkbox
+                                            checked={field.value}
+                                            onCheckedChange={field.onChange}
+                                        />
+                                    </FormControl>
+                                    <div className="space-y-1 leading-none">
+                                        <FormLabel>
+                                            {t("Form.terms")}
+                                        </FormLabel>
+                                        <FormDescription>
+                                            {/*<Link href="/examples/forms">mobile settings</Link> page.*/}
+                                        </FormDescription>
+                                    </div>
                                 </FormItem>
                             )}
-                            />
+                        />
                         <CardFooter className="flex justify-around">
-                            <Button type="submit" variant={"default"} className="w-52">{t("singUpButtonText")}</Button>
+                            <Button type="submit" variant={"default"} className="w-52">{t("Form.singUpButtonText")}</Button>
                         </CardFooter>
                     </form>
                 </Form>
